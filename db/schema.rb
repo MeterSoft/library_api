@@ -12,20 +12,20 @@
 
 ActiveRecord::Schema.define(version: 20161217124913) do
 
-  create_table "books", force: :cascade do |t|
+  create_table "books", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "category_id"
     t.string   "title"
-    t.text     "description"
+    t.text     "description", limit: 65535
     t.string   "file"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
 end

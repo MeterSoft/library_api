@@ -10,7 +10,7 @@ class Categories < Grape::API
 
     desc "Return list of hussars"
     get do
-      Category.all
+      Category.all.as_json(only: [:id, :title, :description], methods: :books_count)
     end
   end
 end
