@@ -13,6 +13,14 @@ class Books < Grape::API
       end
     end
 
+    resource :books do
+
+      desc "Return list of books without category"
+      get do
+        Book.all.as_json(only: [:id, :title, :description], include: { category: { only: [:id, :title] } })
+      end
+    end
+
     resource :categories do
       route_param :category_id do
         resource :books do
