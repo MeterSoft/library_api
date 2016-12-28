@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'grape'
 gem 'pry'
+gem 'carrierwave', '~> 1.0'
 
 group :production, :heroku do
   gem 'pg'

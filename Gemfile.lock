@@ -45,6 +45,10 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     builder (3.2.2)
     byebug (9.0.6)
+    carrierwave (1.0.0)
+      activemodel (>= 4.0.0)
+      activesupport (>= 4.0.0)
+      mime-types (>= 1.16)
     coderay (1.1.1)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -196,6 +200,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  carrierwave (~> 1.0)
   coffee-rails (~> 4.2)
   grape
   jbuilder (~> 2.5)
