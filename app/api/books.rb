@@ -1,10 +1,10 @@
 class Books < Grape::API
     format :json
 
-    before do
-      header 'Access-Control-Allow-Origin', '*'
-      header 'Access-Control-Allow-Methods', '*'
-    end
+    # before do
+    #   header 'Access-Control-Allow-Origin', '*'
+    #   header 'Access-Control-Allow-Methods', '*'
+    # end
 
     helpers do
       def find_category
@@ -17,7 +17,7 @@ class Books < Grape::API
 
       desc "Return list of books without category"
       get do
-        Book.all.as_json(only: [:id, :title, :description], include: { category: { only: [:id, :title] } })
+        Book.order('created_at desc').as_json(only: [:id, :title, :description], include: { category: { only: [:id, :title] } }).reverse
       end
     end
 
@@ -29,7 +29,7 @@ class Books < Grape::API
           desc "Return list of books by category"
           get do
             find_category
-            @category.books
+            @category.books.order('created_at desc')
           end
 
           desc "Return full info about book"
@@ -57,11 +57,17 @@ class Books < Grape::API
             end
           end
 
+          params do
+            optional :title, type: String
+            optional :description, type: String
+            optional :file, type: File
+          end
           post do
+            binding.pry
             find_category
-            @book = @category.books.build({ title: params[:book][:title], 
-                                  description: params[:book][:description], 
-                                  file: params[:book][:file] })
+            @book = @category.books.build({ title: params[:title], 
+                                  description: params[:description], 
+                                  file: params[:file] })
             if @book.save
               { success: true }
             else
@@ -73,8 +79,8 @@ class Books < Grape::API
             find_category
             @book = @category.books.find(params[:id])
             if @book
-              if @book.update_attributes({ title: params[:book][:title], 
-                                           description: params[:book][:description] })
+              if @book.update_attributes({ title: params[:title], 
+                                           description: params[:description] })
                 { success: true }
               else
                 error!('Book not found', 401)
