@@ -17,7 +17,7 @@ class Books < Grape::API
 
       desc "Return list of books without category"
       get do
-        Book.order('created_at desc').as_json(only: [:id, :title, :description], include: { category: { only: [:id, :title] } })
+        Book.order('created_at desc').as_json(only: [:id, :title, :description], methods: :file_url, include: { category: { only: [:id, :title] } })
       end
     end
 
@@ -29,7 +29,7 @@ class Books < Grape::API
           desc "Return list of books by category"
           get do
             find_category
-            @category.books.order('created_at desc')
+            @category.books.order('created_at desc').as_json(only: [:id, :title, :description], methods: :file_url)
           end
 
           desc "Return full info about book"
@@ -63,7 +63,6 @@ class Books < Grape::API
             optional :file, type: File
           end
           post do
-            binding.pry
             find_category
             @book = @category.books.build({ title: params[:title], 
                                   description: params[:description], 
