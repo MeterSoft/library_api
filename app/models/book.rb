@@ -6,6 +6,6 @@ class Book < ApplicationRecord
   mount_uploader :file, BookUploader
 
   def file_url
-    "https://library-api-dev.herokuapp.com" + file.url
+    file.url
   end
 end

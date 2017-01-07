@@ -30,8 +30,9 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'grape'
 gem 'pry'
-gem 'carrierwave', '~> 1.0'
+gem 'carrierwave'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'carrierwave-dropbox'
 
 group :production, :heroku do
   gem 'pg'
