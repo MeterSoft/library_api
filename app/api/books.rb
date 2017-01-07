@@ -17,7 +17,7 @@ class Books < Grape::API
 
       desc "Return list of books without category"
       get do
-        Book.order('created_at desc').as_json(only: [:id, :title, :description], include: { category: { only: [:id, :title] } }).reverse
+        Book.order('created_at desc').as_json(only: [:id, :title, :description], include: { category: { only: [:id, :title] } })
       end
     end
 
