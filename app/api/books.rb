@@ -70,7 +70,7 @@ class Books < Grape::API
             if @book.save
               { success: true }
             else
-              error!(@book.errors.full_messages, 401)
+              error!(@book.errors.messages, 401)
             end
           end
 
