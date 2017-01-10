@@ -1,10 +1,9 @@
 class Categories < Grape::API
   format :json
 
-  # before do
-  #   header 'Access-Control-Allow-Origin', '*'
-  #   header 'Access-Control-Allow-Methods', '*'
-  # end
+  before do
+    error!("401 Unauthorized, 401") unless authenticated
+  end
 
   resource :categories do
 

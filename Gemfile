@@ -33,6 +33,8 @@ gem 'pry'
 gem 'carrierwave'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'carrierwave-dropbox'
+gem 'devise'
+gem 'devise-token_authenticatable'
 
 group :production, :heroku do
   gem 'pg'
